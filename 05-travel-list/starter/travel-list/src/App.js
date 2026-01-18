@@ -33,7 +33,7 @@ export default function App() {
       <PackingList
         items={items}
         onDeleteItem={handleDeleteItem}
-        onToggleItems={handleToggleItem}
+        onToggleItem={handleToggleItem}
       />
       <Stats />
     </div>
@@ -82,7 +82,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItem, handleToggleItem }) {
+function PackingList({ items, onDeleteItem, onToggleItem }) {
   return (
     <div className="list">
       <ul>
@@ -90,7 +90,7 @@ function PackingList({ items, onDeleteItem, handleToggleItem }) {
           <Item
             item={item}
             onDeleteItem={onDeleteItem}
-            onToggleItems={handleToggleItem}
+            onToggleItem={onToggleItem}
             key={item.id}
           />
         ))}
@@ -99,15 +99,13 @@ function PackingList({ items, onDeleteItem, handleToggleItem }) {
   );
 }
 
-function Item({ item, onDeleteItem, onToggleItems }) {
+function Item({ item, onDeleteItem, onToggleItem }) {
   return (
     <li>
       <input
         type="checkbox"
         value={item.packed}
-        onChange={() => {
-          onToggleItems(item.id);
-        }}
+        onChange={() => onToggleItem(item.id)}
       />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
